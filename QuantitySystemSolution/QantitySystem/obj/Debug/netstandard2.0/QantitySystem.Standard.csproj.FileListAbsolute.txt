@@ -1,0 +1,9 @@
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\obj\Debug\netstandard2.0\QantitySystem.Standard.csprojResolveAssemblyReference.cache
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\obj\Debug\netstandard2.0\QantitySystem.Standard.csproj.CoreCompileInputs.cache
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\obj\Debug\netstandard2.0\QantitySystem.Standard.AssemblyInfoInputs.cache
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\obj\Debug\netstandard2.0\QantitySystem.Standard.AssemblyInfo.cs
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\bin\Debug\netstandard2.0\QantitySystem.Standard.deps.json
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\bin\Debug\netstandard2.0\QantitySystem.Standard.dll
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\bin\Debug\netstandard2.0\QantitySystem.Standard.pdb
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\obj\Debug\netstandard2.0\QantitySystem.Standard.dll
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\obj\Debug\netstandard2.0\QantitySystem.Standard.pdb

@@ -1,0 +1,29 @@
+﻿using QuantitySystem.Quantities.BaseQuantities;
+
+namespace QuantitySystem.Quantities
+{
+    public class MagneticReluctance<T>  : DerivedQuantity<T>
+    {
+        public MagneticReluctance()
+            : base(1, new Length<T>(), new Inductance<T>(-1))
+        {
+        }
+
+        public MagneticReluctance(float exponent)
+            : base(exponent, new Length<T>(exponent), new Inductance<T>(-1 * exponent))
+        {
+        }
+
+
+        public static implicit operator MagneticReluctance<T>(T value)
+        {
+            var Q = new MagneticReluctance<T>
+            {
+                Value = value
+            };
+
+            return Q;
+        }
+
+    }
+}

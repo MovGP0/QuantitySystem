@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>QantitySystem.Standard</id>
+    <version>1.4.0</version>
+    <authors>Ahmed Sadek</authors>
+    <owners>Ahmed Sadek</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>http://www.lostparticles.net/</projectUrl>
+    <description>Package Description</description>
+    <copyright>Copyright (c) 2007-2016 at Lost Particles by Ahmed Sadek</copyright>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem.Standard\bin\Debug\netstandard2.0\QantitySystem.Standard.dll" target="lib\netstandard2.0\QantitySystem.Standard.dll" />
+  </files>
+</package>

@@ -1,0 +1,30 @@
+﻿using QuantitySystem.Quantities.BaseQuantities;
+
+namespace QuantitySystem.Quantities
+{
+    public class Acceleration<T> : DerivedQuantity<T>
+    {
+        public Acceleration()
+            : base(1, new Velocity<T>(), new Time<T>(-1))
+        {
+        }
+
+        public Acceleration(float exponent)
+            : base(exponent, new Velocity<T>(exponent), new Time<T>(-1 * exponent))
+        {
+        }
+
+
+        public static implicit operator Acceleration<T>(T value)
+        {
+            var Q = new Acceleration<T>
+            {
+                Value = value
+            };
+
+            return Q;
+        }
+
+
+    }
+}

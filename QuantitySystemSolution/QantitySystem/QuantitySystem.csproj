@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Lost Particles Network</Company>
+    <Version>1.4.0</Version>
+    <Product>Quantity System</Product>
+    <Copyright>Copyright (c) 2007-2016 at Lost Particles by Ahmed Sadek</Copyright>
+    <NeutralLanguage />
+    <Authors>Ahmed Sadek</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>http://quantitysystem.org/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ibluesun/QuantitySystem</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageId>QantitySystem</PackageId>
+    <SignAssembly>false</SignAssembly>
+    <PackageLicenseUrl>https://opensource.org/licenses/MS-RL</PackageLicenseUrl>
+    <AssemblyName>QuantitySystem</AssemblyName>
+    <RootNamespace>QuantitySystem</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="Units\Currency\Currencies.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Currencies.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Units\Currency\Currencies.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Currencies.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

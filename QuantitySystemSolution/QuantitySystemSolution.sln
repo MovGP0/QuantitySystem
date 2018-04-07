@@ -1,57 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QuantitySystemTests", "QuantitySystemTests", "{11635727-736E-4C7D-93FE-CD36FE61917E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{27291231-815B-4D24-B9C9-7ABDBEEE948E}"
-	ProjectSection(SolutionItems) = preProject
-		Issues.txt = Issues.txt
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
-		Multiplication Product Notes.txt = Multiplication Product Notes.txt
-		OO Features.txt = OO Features.txt
-		Qs.pdn = Qs.pdn
-		Qs.png = Qs.png
-		QuantitySystemSolution.vsmdi = QuantitySystemSolution.vsmdi
-		What's New.txt = What's New.txt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLR", "DLR", "{BD2784D3-94C2-4F74-AF57-050ED12B6E5D}"
-	ProjectSection(SolutionItems) = preProject
-		DLR\Microsoft.Dynamic.dll = DLR\Microsoft.Dynamic.dll
-		DLR\Microsoft.Scripting.dll = DLR\Microsoft.Scripting.dll
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{B97E2DDA-3B38-465E-93A4-F48A3FD5D633}"
-	ProjectSection(SolutionItems) = preProject
-		Libraries\ParticleLexer.dll = Libraries\ParticleLexer.dll
-		Libraries\PassiveFlow.dll = Libraries\PassiveFlow.dll
-		Libraries\SymbolicAlgebra.dll = Libraries\SymbolicAlgebra.dll
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantitySystem", "QuantitySystem\QuantitySystem.csproj", "{78909C0B-AA53-48F9-8AC9-F3937383629C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantitySystemTestingProject", "QuantitySystemTestingProject\QuantitySystemTestingProject.csproj", "{6B22C63C-7927-4CB2-87A8-2BA3428570DC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitsTestingProject", "UnitsTestingProject\UnitsTestingProject.csproj", "{2E1B9096-614C-405F-8587-1897F451F139}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantitySystemCalculator", "QuantitySystemCalculator\QuantitySystemCalculator.csproj", "{140E6C82-4B64-45AA-8FE1-91159322A29E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8ECF0F6E-AFCB-4295-BFA5-28F7E193CB7B} = {8ECF0F6E-AFCB-4295-BFA5-28F7E193CB7B}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qs", "QuantitySystem.Runtime\Qs.csproj", "{615A100B-4890-434E-8869-2A9B3200D664}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QsTestProject", "QsTestProject\QsTestProject.csproj", "{70D4A4DF-115F-440E-B97F-E76974A8AC14}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QsGraphics", "QsGraphics\QsGraphics.csproj", "{8ECF0F6E-AFCB-4295-BFA5-28F7E193CB7B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FDBE8316-6E9E-4864-BEE0-97641E286A28}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qs.Scripting", "Qs.Scripting\Qs.Scripting.csproj", "{9D9327DD-4B4C-4FB5-A671-1287D1C15341}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qs.RT", "Qs.RT\Qs.RT.csproj", "{EFF13160-FB38-439E-A824-14838DF636A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuantitySystem", "QantitySystem\QuantitySystem.csproj", "{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,88 +11,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78909C0B-AA53-48F9-8AC9-F3937383629C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78909C0B-AA53-48F9-8AC9-F3937383629C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78909C0B-AA53-48F9-8AC9-F3937383629C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78909C0B-AA53-48F9-8AC9-F3937383629C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B22C63C-7927-4CB2-87A8-2BA3428570DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B22C63C-7927-4CB2-87A8-2BA3428570DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B22C63C-7927-4CB2-87A8-2BA3428570DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B22C63C-7927-4CB2-87A8-2BA3428570DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E1B9096-614C-405F-8587-1897F451F139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E1B9096-614C-405F-8587-1897F451F139}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E1B9096-614C-405F-8587-1897F451F139}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E1B9096-614C-405F-8587-1897F451F139}.Release|Any CPU.Build.0 = Release|Any CPU
-		{140E6C82-4B64-45AA-8FE1-91159322A29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{140E6C82-4B64-45AA-8FE1-91159322A29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{140E6C82-4B64-45AA-8FE1-91159322A29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{140E6C82-4B64-45AA-8FE1-91159322A29E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{615A100B-4890-434E-8869-2A9B3200D664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{615A100B-4890-434E-8869-2A9B3200D664}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{615A100B-4890-434E-8869-2A9B3200D664}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{615A100B-4890-434E-8869-2A9B3200D664}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70D4A4DF-115F-440E-B97F-E76974A8AC14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70D4A4DF-115F-440E-B97F-E76974A8AC14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70D4A4DF-115F-440E-B97F-E76974A8AC14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70D4A4DF-115F-440E-B97F-E76974A8AC14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8ECF0F6E-AFCB-4295-BFA5-28F7E193CB7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8ECF0F6E-AFCB-4295-BFA5-28F7E193CB7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8ECF0F6E-AFCB-4295-BFA5-28F7E193CB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8ECF0F6E-AFCB-4295-BFA5-28F7E193CB7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D9327DD-4B4C-4FB5-A671-1287D1C15341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D9327DD-4B4C-4FB5-A671-1287D1C15341}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D9327DD-4B4C-4FB5-A671-1287D1C15341}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D9327DD-4B4C-4FB5-A671-1287D1C15341}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFF13160-FB38-439E-A824-14838DF636A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFF13160-FB38-439E-A824-14838DF636A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFF13160-FB38-439E-A824-14838DF636A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFF13160-FB38-439E-A824-14838DF636A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{6B22C63C-7927-4CB2-87A8-2BA3428570DC} = {11635727-736E-4C7D-93FE-CD36FE61917E}
-		{2E1B9096-614C-405F-8587-1897F451F139} = {11635727-736E-4C7D-93FE-CD36FE61917E}
-		{70D4A4DF-115F-440E-B97F-E76974A8AC14} = {11635727-736E-4C7D-93FE-CD36FE61917E}
-		{8ECF0F6E-AFCB-4295-BFA5-28F7E193CB7B} = {FDBE8316-6E9E-4864-BEE0-97641E286A28}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs06
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = UnitsTestingProject\\UnitsTestingProject.csproj
-		SccProjectTopLevelParentUniqueName1 = QuantitySystemSolution.sln
-		SccProjectName1 = UnitsTestingProject
-		SccLocalPath1 = UnitsTestingProject
-		SccProjectUniqueName2 = QuantitySystemCalculator\\QuantitySystemCalculator.csproj
-		SccProjectName2 = QuantitySystemCalculator
-		SccLocalPath2 = QuantitySystemCalculator
-		SccProjectUniqueName3 = QuantitySystem.Runtime\\Qs.csproj
-		SccProjectName3 = QuantitySystem.Runtime
-		SccLocalPath3 = QuantitySystem.Runtime
-		SccProjectUniqueName4 = QsTestProject\\QsTestProject.csproj
-		SccProjectTopLevelParentUniqueName4 = QuantitySystemSolution.sln
-		SccProjectName4 = QsTestProject
-		SccLocalPath4 = QsTestProject
-		SccProjectUniqueName5 = QuantitySystemTestingProject\\QuantitySystemTestingProject.csproj
-		SccProjectTopLevelParentUniqueName5 = QuantitySystemSolution.sln
-		SccProjectName5 = QuantitySystemTestingProject
-		SccLocalPath5 = QuantitySystemTestingProject
-		SccProjectUniqueName6 = QuantitySystem\\QuantitySystem.csproj
-		SccProjectName6 = QuantitySystem
-		SccLocalPath6 = QuantitySystem
-		SccProjectUniqueName7 = QsGraphics\\QsGraphics.csproj
-		SccProjectTopLevelParentUniqueName7 = QuantitySystemSolution.sln
-		SccProjectName7 = QsGraphics
-		SccLocalPath7 = QsGraphics
-		SccProjectUniqueName8 = Qs.Scripting\\Qs.Scripting.csproj
-		SccProjectName8 = Qs.Scripting
-		SccLocalPath8 = Qs.Scripting
-		SccProjectUniqueName9 = Qs.RT\\Qs.RT.csproj
-		SccProjectName9 = Qs.RT
-		SccLocalPath9 = Qs.RT
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4496D8C2-BADE-4C87-B5ED-122009828F4F}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = QuantitySystemSolution.vsmdi
