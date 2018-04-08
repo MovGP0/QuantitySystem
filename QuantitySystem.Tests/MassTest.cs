@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using QuantitySystem.Quantities.BaseQuantities;
 using QuantitySystem.Units;
 using QuantitySystem.Units.Metric.SI.BaseUnits;
@@ -9,56 +9,45 @@ namespace QuantitySystem.Tests
     ///This is a test class for MassTest and is intended
     ///to contain all MassTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class MassTest
     {
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext { get; set; }
-
-        /// <summary>
-        ///A test for Mass`1 Constructor
-        ///</summary>
-        public void MassConstructorTestHelper<T>()
-        {
-            var target = new Mass<T>();
-            var massDimension = new QuantityDimension(1, 0, 0);
-
-            Assert.AreEqual(massDimension, target.Dimension);
-        }
-
-        [TestMethod]
+        [Test]
         public void MassConstructorTest()
         {
-            MassConstructorTestHelper<GenericParameterHelper>();
+            var target = new Mass<float>();
+            var massDimension = new QuantityDimension(1, 0, 0);
+
+            Assert.That(target.Dimension, Is.EqualTo(massDimension));
         }
 
-        [TestMethod]
+        [Test]
         public void MassAddTest()
         {
             Mass<double> l1 = 50;
             Mass<double> l2 = 50;
             var l = l1 + l2;
 
-            Assert.AreEqual(100, l.Value);
+            Assert.That(l.Value, Is.EqualTo(100));
         }
 
-        [TestMethod]
+        [Test]
         public void UnitMassAddTest()
         {
             var l1 = MetricUnit.Kilo<Gram>(2);
             var l2 = MetricUnit.None<Gram>(500);
 
             var l = l1 + l2;
-            Assert.AreEqual(2.5, l.Value);
-
             var lr = l2 + l1;
-            Assert.AreEqual(2500, lr.Value);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(l.Value, Is.EqualTo(2.5));
+                Assert.That(lr.Value, Is.EqualTo(2500));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void MassSubtractTest()
         {
             Mass<double> l1 = 150;
@@ -66,10 +55,10 @@ namespace QuantitySystem.Tests
 
             var l = l1 - l2;
 
-            Assert.AreEqual(80, l.Value);
+            Assert.That(l.Value, Is.EqualTo(80));
         }
 
-        [TestMethod]
+        [Test]
         public void MassMultiplyTest()
         {
             Mass<double> m1 = 20;
@@ -77,11 +66,14 @@ namespace QuantitySystem.Tests
 
             var m = m1 * m2;
 
-            Assert.AreEqual(400, m.Value);
-            Assert.AreEqual(m.Dimension, new QuantityDimension(2, 0, 0));
+            Assert.Multiple(() =>
+            {
+                Assert.That(m.Value, Is.EqualTo(400));
+                Assert.That(m.Dimension, Is.EqualTo(new QuantityDimension(2, 0, 0)));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void MassDivideTest()
         {
             Mass<double> m1 = 20;
@@ -89,11 +81,14 @@ namespace QuantitySystem.Tests
 
             var m = m1 / m2;
 
-            Assert.AreEqual(1, m.Value);
-            Assert.AreEqual(m.Dimension, new QuantityDimension());
+            Assert.Multiple(() =>
+            {
+                Assert.That(m.Value, Is.EqualTo(1));
+                Assert.That(m.Dimension, Is.EqualTo(new QuantityDimension()));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void MassComplexAddTest()
         {
             Mass<ComplexNumber> m1 = new ComplexNumber { Real = 1, Imaginary = 10 };
@@ -102,10 +97,11 @@ namespace QuantitySystem.Tests
             var m = m1 + m2;
 
             var expected = new ComplexNumber { Real = 3, Imaginary = 14 };
-            Assert.AreEqual(expected, m.Value);
+
+            Assert.That(m.Value, Is.EqualTo(expected));
         }
 
-        [TestMethod]
+        [Test]
         public void MassComplexSubtractTest()
         {
             Mass<ComplexNumber> m1 = new ComplexNumber { Real = 1, Imaginary = 10 };
@@ -114,11 +110,11 @@ namespace QuantitySystem.Tests
             var m = m1 - m2;
 
             var expected = new ComplexNumber { Real = -1, Imaginary = 6 };
-            
-            Assert.AreEqual(expected, m.Value);
+
+            Assert.That(m.Value, Is.EqualTo(expected));
         }
 
-        [TestMethod]
+        [Test]
         public void MassComplexMultiplyTest()
         {
             Mass<ComplexNumber> m1 = new ComplexNumber { Real = 1, Imaginary = 10 };
@@ -128,22 +124,27 @@ namespace QuantitySystem.Tests
 
             var expected = new ComplexNumber { Real = 2, Imaginary = 40 };
 
-            Assert.AreEqual(expected, m.Value);
-            Assert.AreEqual(m.Dimension, new QuantityDimension(2,0,0));
+            Assert.Multiple(() =>
+            {
+                Assert.That(m.Value, Is.EqualTo(expected));
+                Assert.That(m.Dimension, Is.EqualTo(new QuantityDimension(2, 0, 0)));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void MassComplexDivideTest()
         {
             Mass<ComplexNumber> m1 = new ComplexNumber { Real = 1, Imaginary = 10 };
             Mass<ComplexNumber> m2 = new ComplexNumber { Real = 2, Imaginary = 5 };
 
             var m = m1 / m2;
-
             var expected = new ComplexNumber { Real = 0.5, Imaginary = 2 };
 
-            Assert.AreEqual(expected, m.Value);
-            Assert.AreEqual(m.Dimension, new QuantityDimension());
+            Assert.Multiple(() =>
+            {
+                Assert.That(m.Value, Is.EqualTo(expected));
+                Assert.That(m.Dimension, Is.EqualTo(new QuantityDimension()));
+            });
         }
     }
 }

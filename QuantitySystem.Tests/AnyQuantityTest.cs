@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using QuantitySystem.Quantities;
 using QuantitySystem.Quantities.BaseQuantities;
 
@@ -8,7 +8,7 @@ namespace QuantitySystem.Tests
     ///This is a test class for AnyQuantityTest and is intended
     ///to contain all AnyQuantityTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class AnyQuantityTest
     {
         /// <summary>
@@ -17,7 +17,7 @@ namespace QuantitySystem.Tests
         ///</summary>
         public TestContext TestContext { get; set; }
 
-        [TestMethod]
+        [Test]
         public void VelocityQuantityTest()
         {
             Length<double> l = 20;
@@ -27,11 +27,14 @@ namespace QuantitySystem.Tests
 
             var expected = new Velocity<double> { Value = 2 };
 
-            Assert.AreEqual(expected, q);
-            Assert.AreEqual(expected.Value, q.Value);
+            Assert.Multiple(() =>
+            {
+                Assert.That(q, Is.EqualTo(expected));
+                Assert.That(q.Value, Is.EqualTo(expected.Value));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void AccelerationQuantityTest()
         {
             Velocity<double> l = 20;
@@ -41,11 +44,14 @@ namespace QuantitySystem.Tests
 
             var expected = new Acceleration<double> { Value = 2 };
 
-            Assert.AreEqual(expected, q);
-            Assert.AreEqual(expected.Value, q.Value);
+            Assert.Multiple(() =>
+            {
+                Assert.That(q, Is.EqualTo(expected));
+                Assert.That(q.Value, Is.EqualTo(expected.Value));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void ForceQuantityTest()
         {
             Acceleration<double> a = 20;
@@ -54,12 +60,14 @@ namespace QuantitySystem.Tests
             var q = m * a;
 
             var expected = new Force<double> { Value = 200 };
-
-            Assert.AreEqual(expected, q);
-            Assert.AreEqual(expected.Value, q.Value);
+            Assert.Multiple(() =>
+            {
+                Assert.That(q, Is.EqualTo(expected));
+                Assert.That(q.Value, Is.EqualTo(expected.Value));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void PressureQuantityTest()
         {
             Force<double> f = 20;
@@ -68,12 +76,14 @@ namespace QuantitySystem.Tests
             var q = f / a;
 
             var expected = new Pressure<double> { Value = 2 };
-
-            Assert.AreEqual(expected, q);
-            Assert.AreEqual(expected.Value, q.Value);
+            Assert.Multiple(() =>
+            {
+                Assert.That(q, Is.EqualTo(expected));
+                Assert.That(q.Value, Is.EqualTo(expected.Value));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void EnergyQuantityTest()
         {
             Force<double> f = 20;
@@ -83,11 +93,14 @@ namespace QuantitySystem.Tests
 
             var expected = new Energy<double> { Value = 200 };
 
-            Assert.AreEqual(expected, q);
-            Assert.AreEqual(expected.Value, q.Value);
+            Assert.Multiple(() =>
+            {
+                Assert.That(q, Is.EqualTo(expected));
+                Assert.That(q.Value, Is.EqualTo(expected.Value));
+            });
         }
 
-        [TestMethod]
+        [Test]
         public void PowerQuantityTest()
         {
             Energy<double> e = 20;
@@ -96,15 +109,17 @@ namespace QuantitySystem.Tests
             var q = e / t;
 
             var expected = new Power<double> { Value = 2 };
-
-            Assert.AreEqual(expected, q);
-            Assert.AreEqual(expected.Value, q.Value);
+            Assert.Multiple(() =>
+            {
+                Assert.That(expected, Is.EqualTo(q));
+                Assert.That(q.Value, Is.EqualTo(expected.Value));
+            });
         }
 
         /// <summary>
         /// Testing to reach power after several calculation
         /// </summary>
-        [TestMethod]
+        [Test]
         public void PowerIncrementalQuantityTest()
         {
             Length<double> l = 100;
@@ -120,15 +135,17 @@ namespace QuantitySystem.Tests
             var power = work / t; // 12500 watt
 
             var expected = new Power<double> { Value = 12500 };
-
-            Assert.AreEqual(expected, power);
-            Assert.AreEqual(expected.Value, power.Value);
+            Assert.Multiple(() =>
+            {
+                Assert.That(power, Is.EqualTo(expected));
+                Assert.That(power.Value, Is.EqualTo(expected.Value));
+            });
         }
 
         /// <summary>
         /// Testing to reach power but in one line calculation.
         /// </summary>
-        [TestMethod]
+        [Test]
         public void PowerInOneLineQuantityTest()
         {
             Length<double> l = 100;
@@ -139,8 +156,11 @@ namespace QuantitySystem.Tests
 
             var expected = new Power<double> { Value = 12500 };
 
-            Assert.AreEqual(expected, power);
-            Assert.AreEqual(expected.Value, power.Value);
+            Assert.Multiple(() =>
+            {
+                Assert.That(power, Is.EqualTo(expected));
+                Assert.That(power.Value, Is.EqualTo(expected.Value));
+            });
         }
     }
 }

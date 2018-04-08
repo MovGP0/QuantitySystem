@@ -12,10 +12,13 @@
     <copyright>Copyright (c) 2007-2016 at Lost Particles by Ahmed Sadek</copyright>
     <repository type="git" url="https://github.com/ibluesun/QuantitySystem" />
     <dependencies>
-      <group targetFramework=".NETStandard2.0" />
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Roslynator.Analyzers" version="1.8.0" exclude="Build,Analyzers" />
+        <dependency id="Roslynator.CodeFixes" version="1.8.0" exclude="Build,Analyzers" />
+      </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem\bin\Debug\netstandard2.0\QuantitySystem.dll" target="lib\netstandard2.0\QuantitySystem.dll" />
+    <file src="C:\Users\Johann\Documents\QuantitySystem\QantitySystem\bin\Debug\netstandard2.0\QuantitySystem.dll" target="lib\netstandard2.0\QuantitySystem.dll" />
   </files>
 </package>

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 
 namespace QuantitySystem.Tests
 {
@@ -6,36 +6,33 @@ namespace QuantitySystem.Tests
     ///This is a test class for QuantityDimensionTest and is intended
     ///to contain all QuantityDimensionTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class QuantityDimensionTest
     {
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext { get; set; }
-
-        /// <summary>
         ///A test for QuantityDimension Constructor
         ///</summary>
-        [TestMethod]
+        [Test]
         public void QuantityDimensionConstructorTest1()
         {
             var target = new QuantityDimension();
 
-            Assert.AreEqual(0, target.Mass.Exponent);
-            Assert.AreEqual(0, target.Length.Exponent);
-            Assert.AreEqual(0, target.Time.Exponent);
-            Assert.AreEqual(0, target.Temperature.Exponent);
-            Assert.AreEqual(0, target.LuminousIntensity.Exponent);
-            Assert.AreEqual(0, target.ElectricCurrent.Exponent);
-            Assert.AreEqual(0, target.AmountOfSubstance.Exponent);
+            Assert.Multiple(() =>
+            {
+                Assert.That(target.Mass.Exponent, Is.Zero);
+                Assert.That(target.Length.Exponent, Is.Zero);
+                Assert.That(target.Time.Exponent, Is.Zero);
+                Assert.That(target.Temperature.Exponent, Is.Zero);
+                Assert.That(target.LuminousIntensity.Exponent, Is.Zero);
+                Assert.That(target.ElectricCurrent.Exponent, Is.Zero);
+                Assert.That(target.AmountOfSubstance.Exponent, Is.Zero);
+            });
         }
 
         /// <summary>
         ///A test for QuantityDimension Constructor
         ///</summary>
-        [TestMethod]
+        [Test]
         public void QuantityDimensionConstructorTest()
         {
             const int mass = 1;
@@ -43,13 +40,16 @@ namespace QuantitySystem.Tests
             const int time = 3;
             var target = new QuantityDimension(mass, length, time);
 
-            Assert.AreEqual(1, target.Mass.Exponent);
-            Assert.AreEqual(2, target.Length.Exponent);
-            Assert.AreEqual(3, target.Time.Exponent);
-            Assert.AreEqual(0, target.Temperature.Exponent);
-            Assert.AreEqual(0, target.LuminousIntensity.Exponent);
-            Assert.AreEqual(0, target.ElectricCurrent.Exponent);
-            Assert.AreEqual(0, target.AmountOfSubstance.Exponent);
+            Assert.Multiple(() =>
+            {
+                Assert.That(target.Mass.Exponent, Is.EqualTo(1));
+                Assert.That(target.Length.Exponent, Is.EqualTo(2));
+                Assert.That(target.Time.Exponent, Is.EqualTo(3));
+                Assert.That(target.Temperature.Exponent, Is.EqualTo(0));
+                Assert.That(target.LuminousIntensity.Exponent, Is.EqualTo(0));
+                Assert.That(target.ElectricCurrent.Exponent, Is.EqualTo(0));
+                Assert.That(target.AmountOfSubstance.Exponent, Is.EqualTo(0));
+            });
         }
     }
 }

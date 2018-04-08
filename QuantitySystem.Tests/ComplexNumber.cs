@@ -11,7 +11,7 @@
 
         public override string ToString()
         {
-            return Real + " + " + Imaginary + "i";
+            return $"{Real} + {Imaginary}i";
         }
 
         public static ComplexNumber operator +(ComplexNumber left, ComplexNumber right)

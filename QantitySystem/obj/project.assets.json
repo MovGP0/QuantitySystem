@@ -25,6 +25,12 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "Roslynator.Analyzers/1.8.0": {
+        "type": "package"
+      },
+      "Roslynator.CodeFixes/1.8.0": {
+        "type": "package"
       }
     }
   },
@@ -169,11 +175,43 @@
         "netstandard.library.2.0.1.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "Roslynator.Analyzers/1.8.0": {
+      "sha512": "f+AlkIc6i07Iv/tlQXj09CCOEVF6CcuB04ILRZDVHJBT5h+iDYYw9WIv8NvSvUEghBv4odCjFz/unjFDm5lbxw==",
+      "type": "package",
+      "path": "roslynator.analyzers/1.8.0",
+      "files": [
+        "analyzers/dotnet/cs/Roslynator.CSharp.Analyzers.dll",
+        "analyzers/dotnet/cs/Roslynator.Common.dll",
+        "analyzers/dotnet/cs/Roslynator.Core.dll",
+        "analyzers/dotnet/cs/Roslynator.Workspaces.dll",
+        "roslynator.analyzers.1.8.0.nupkg.sha512",
+        "roslynator.analyzers.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "Roslynator.CodeFixes/1.8.0": {
+      "sha512": "GuW+w/zzUQ7kKdullQytqojg3ZRZ7f60+PMqj/STTI+DXKidIRPfcLTIsR+AjDi0/1CVeXQiPWeLjV6EoHXyMA==",
+      "type": "package",
+      "path": "roslynator.codefixes/1.8.0",
+      "files": [
+        "analyzers/dotnet/cs/Roslynator.CSharp.CodeFixes.dll",
+        "analyzers/dotnet/cs/Roslynator.Common.dll",
+        "analyzers/dotnet/cs/Roslynator.Core.dll",
+        "analyzers/dotnet/cs/Roslynator.Workspaces.dll",
+        "roslynator.codefixes.1.8.0.nupkg.sha512",
+        "roslynator.codefixes.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "NETStandard.Library >= 2.0.1"
+      "NETStandard.Library >= 2.0.1",
+      "Roslynator.Analyzers >= 1.8.0",
+      "Roslynator.CodeFixes >= 1.8.0"
     ]
   },
   "packageFolders": {
@@ -183,11 +221,11 @@
   "project": {
     "version": "1.4.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Johann\\Documents\\QuantitySystem\\QuantitySystemSolution\\QantitySystem\\QuantitySystem.csproj",
+      "projectUniqueName": "C:\\Users\\Johann\\Documents\\QuantitySystem\\QantitySystem\\QuantitySystem.csproj",
       "projectName": "QantitySystem",
-      "projectPath": "C:\\Users\\Johann\\Documents\\QuantitySystem\\QuantitySystemSolution\\QantitySystem\\QuantitySystem.csproj",
+      "projectPath": "C:\\Users\\Johann\\Documents\\QuantitySystem\\QantitySystem\\QuantitySystem.csproj",
       "packagesPath": "C:\\Users\\Johann\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Johann\\Documents\\QuantitySystem\\QuantitySystemSolution\\QantitySystem\\obj\\",
+      "outputPath": "C:\\Users\\Johann\\Documents\\QuantitySystem\\QantitySystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -223,6 +261,14 @@
             "target": "Package",
             "version": "[2.0.1, )",
             "autoReferenced": true
+          },
+          "Roslynator.Analyzers": {
+            "target": "Package",
+            "version": "[1.8.0, )"
+          },
+          "Roslynator.CodeFixes": {
+            "target": "Package",
+            "version": "[1.8.0, )"
           }
         },
         "imports": [

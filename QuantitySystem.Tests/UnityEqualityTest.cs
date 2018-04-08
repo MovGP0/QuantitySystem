@@ -1,115 +1,99 @@
 ﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using QuantitySystem.Units;
 using QuantitySystem.Units.English;
 using QuantitySystem.Units.Metric.SI.BaseUnits;
 
 namespace QuantitySystem.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class UnityEqualityTest
     {
-        [TestMethod]
+        [Test]
         public void ListTest()
         {
-            Unit millimetre = new Metre() { UnitPrefix = MetricPrefix.Milli };
-            Unit centimetre = new Metre() { UnitPrefix = MetricPrefix.Centi };
-            Unit decimetre = new Metre() { UnitPrefix = MetricPrefix.Deci };
+            Unit millimetre = new Metre { UnitPrefix = MetricPrefix.Milli };
+            Unit centimetre = new Metre { UnitPrefix = MetricPrefix.Centi };
+            Unit decimetre = new Metre { UnitPrefix = MetricPrefix.Deci };
             Unit inch = new Inch();
-            var units = new List<Unit>();
-            units.Add(millimetre);
-            units.Add(centimetre);
-            units.Add(decimetre);
-            units.Add(inch);
+            var units = new List<Unit> { millimetre, centimetre, decimetre, inch };
 
             //Theese should work, of course
-            Assert.IsTrue(units.Contains(millimetre));
-            Assert.IsTrue(units.Contains(centimetre));
-            Assert.IsTrue(units.Contains(decimetre));
-            Assert.IsTrue(units.Contains(inch));
-
-            Unit newMillimetre = new Metre() { UnitPrefix = MetricPrefix.Milli };
-            Unit newInch = new Inch();
-            //Why this does not work? After all, isn't a millimetre always a millimetre?
-            Assert.IsTrue(units.Contains(newMillimetre));
-            Assert.IsTrue(units.Contains(newInch));
-
-            var containsNewMillimetre = false;
-            var containsNewInch = false;
-            foreach (var unit in units)
+            Assert.Multiple(() =>
             {
-                if (unit == newMillimetre)
-                {
-                    containsNewMillimetre = true;
-                }
-                if (unit == newInch)
-                {
-                    containsNewInch = true;
-                }
-            }
-            Assert.IsTrue(containsNewMillimetre);
-            Assert.IsTrue(containsNewInch);
+                Assert.IsTrue(units.Contains(millimetre));
+                Assert.IsTrue(units.Contains(centimetre));
+                Assert.IsTrue(units.Contains(decimetre));
+                Assert.IsTrue(units.Contains(inch));
+            });
+
+            Unit newMillimetre = new Metre { UnitPrefix = MetricPrefix.Milli };
+            Unit newInch = new Inch();
+
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(units.Contains(newMillimetre));
+                Assert.IsTrue(units.Contains(newInch));
+                Assert.IsTrue(units.Contains(newMillimetre));
+                Assert.IsTrue(units.Contains(newInch));
+            });
         }
-        [TestMethod]
+
+        [Test]
         public void DictionaryTest()
         {
-            Unit millimetre = new Metre() { UnitPrefix = MetricPrefix.Milli };
-            Unit centimetre = new Metre() { UnitPrefix = MetricPrefix.Centi };
-            Unit decimetre = new Metre() { UnitPrefix = MetricPrefix.Deci };
+            Unit millimetre = new Metre { UnitPrefix = MetricPrefix.Milli };
+            Unit centimetre = new Metre { UnitPrefix = MetricPrefix.Centi };
+            Unit decimetre = new Metre { UnitPrefix = MetricPrefix.Deci };
             Unit inch = new Inch();
-            var units = new Dictionary<Unit, string>();
-            units.Add(millimetre, millimetre.Symbol);
-            units.Add(centimetre, centimetre.Symbol);
-            units.Add(decimetre, decimetre.Symbol);
-            units.Add(inch, inch.Symbol);
-
-            //Theese should work, of course
-            Assert.IsTrue(units.ContainsKey(millimetre));
-            Assert.IsTrue(units.ContainsKey(centimetre));
-            Assert.IsTrue(units.ContainsKey(decimetre));
-            Assert.IsTrue(units.ContainsKey(inch));
-
-            Unit newMillimetre = new Metre() { UnitPrefix = MetricPrefix.Milli };
-            Unit newInch = new Inch();
-            //Why this does not work? After all, isn't a millimetre always a millimetre?
-            Assert.IsTrue(units.ContainsKey(newMillimetre));
-            Assert.IsTrue(units.ContainsKey(newInch));
-
-            var containsNewMillimetre = false;
-            var containsNewInch = false;
-            foreach (var unit in units.Keys)
+            var units = new Dictionary<Unit, string>
             {
-                if (unit == newMillimetre)
-                {
-                    containsNewMillimetre = true;
-                }
-                if (unit == newInch)
-                {
-                    containsNewInch = true;
-                }
-            }
-            Assert.IsTrue(containsNewMillimetre);
-            Assert.IsTrue(containsNewInch);
+                {millimetre, millimetre.Symbol},
+                {centimetre, centimetre.Symbol},
+                {decimetre, decimetre.Symbol},
+                {inch, inch.Symbol}
+            };
 
-            Assert.IsTrue(units[newMillimetre] == millimetre.Symbol);
-            Assert.IsTrue(units[newInch] == inch.Symbol);
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(units.ContainsKey(millimetre));
+                Assert.IsTrue(units.ContainsKey(centimetre));
+                Assert.IsTrue(units.ContainsKey(decimetre));
+                Assert.IsTrue(units.ContainsKey(inch));
+            });
+
+            Unit newMillimetre = new Metre { UnitPrefix = MetricPrefix.Milli };
+            Unit newInch = new Inch();
+
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(units.ContainsKey(newMillimetre));
+                Assert.IsTrue(units.ContainsKey(newInch));
+                Assert.IsTrue(units.ContainsKey(newMillimetre));
+                Assert.IsTrue(units.ContainsKey(newInch));
+                Assert.IsTrue(units[newMillimetre] == millimetre.Symbol);
+                Assert.IsTrue(units[newInch] == inch.Symbol);
+            });
         }
 
-        private bool AreNotEqual(Unit first, Unit other)
+        private static bool AreNotEqual(Unit first, Unit other)
         {
             return first != other;
         }
 
-        [TestMethod]
+        [Test]
         public void MoreEqualityTestsTest()
         {
-            Unit millimetre = new Metre() { UnitPrefix = MetricPrefix.Milli };
-            Unit centimetre = new Metre() { UnitPrefix = MetricPrefix.Centi };
-            Unit decimetre = new Metre() { UnitPrefix = MetricPrefix.Deci };
+            Unit millimetre = new Metre { UnitPrefix = MetricPrefix.Milli };
+            Unit centimetre = new Metre { UnitPrefix = MetricPrefix.Centi };
+            Unit decimetre = new Metre { UnitPrefix = MetricPrefix.Deci };
             Unit inch = new Inch();
 
-            Assert.IsTrue(millimetre != centimetre);
-            Assert.IsTrue(AreNotEqual(millimetre,centimetre));
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(millimetre != centimetre);
+                Assert.IsTrue(AreNotEqual(millimetre, centimetre));
+            });
         }
     }
 }

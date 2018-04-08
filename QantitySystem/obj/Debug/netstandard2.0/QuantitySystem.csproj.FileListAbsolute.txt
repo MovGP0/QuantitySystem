@@ -7,3 +7,12 @@ C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem\ob
 C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.AssemblyInfo.cs
 C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.dll
 C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.pdb
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\bin\Debug\netstandard2.0\QuantitySystem.deps.json
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\bin\Debug\netstandard2.0\QuantitySystem.dll
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\bin\Debug\netstandard2.0\QuantitySystem.pdb
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.csprojResolveAssemblyReference.cache
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.csproj.CoreCompileInputs.cache
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.AssemblyInfoInputs.cache
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.AssemblyInfo.cs
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.dll
+C:\Users\Johann\Documents\QuantitySystem\QantitySystem\obj\Debug\netstandard2.0\QuantitySystem.pdb

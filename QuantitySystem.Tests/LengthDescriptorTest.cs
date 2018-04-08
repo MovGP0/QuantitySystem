@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using QuantitySystem.DimensionDescriptors;
 
 namespace QuantitySystem.Tests
@@ -7,7 +7,7 @@ namespace QuantitySystem.Tests
     ///This is a test class for LengthDescriptorTest and is intended
     ///to contain all LengthDescriptorTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class LengthDescriptorTest
     {
         /// <summary>
@@ -19,7 +19,7 @@ namespace QuantitySystem.Tests
         /// <summary>
         ///A test for LengthDescriptor Constructor
         ///</summary>
-        [TestMethod]
+        [Test]
         public void LengthDescriptorConstructorTest()
         {
             const float normalExponent = 1;
@@ -27,13 +27,13 @@ namespace QuantitySystem.Tests
 
             var target = new LengthDescriptor(normalExponent, radiusExponent);
 
-            Assert.AreEqual(0, target.Exponent);
+            Assert.That(target.Exponent, Is.Zero);
         }
 
         /// <summary>
         ///A test for Subtract
         ///</summary>
-        [TestMethod]
+        [Test]
         public void LengthDescriptorSubtractTest()
         {
             var target = new LengthDescriptor(3,2);
@@ -42,28 +42,27 @@ namespace QuantitySystem.Tests
             var expected = new LengthDescriptor(2,1);
 
             var actual = target.Subtract(dimensionDescriptor);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         /// <summary>
         ///A test for Multiply
         ///</summary>
-        [TestMethod]
+        [Test]
         public void LengthDescriptorMultiplyTest()
         {
             var target = new LengthDescriptor(3,2);
             const int exponent = 2;
             var expected = new LengthDescriptor(6,4);
-            LengthDescriptor actual;
-            actual = target.Multiply(exponent);
+            var actual = target.Multiply(exponent);
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         /// <summary>
         ///A test for Add
         ///</summary>
-        [TestMethod]
+        [Test]
         public void LengthDescriptorAddTest()
         {
             var target = new LengthDescriptor(3,2);
@@ -71,7 +70,7 @@ namespace QuantitySystem.Tests
             var expected = new LengthDescriptor(4,3);
             var actual = target.Add(dimensionDescriptor);
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

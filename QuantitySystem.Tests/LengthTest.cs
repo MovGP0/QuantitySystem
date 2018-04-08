@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using QuantitySystem.Quantities.BaseQuantities;
 
 namespace QuantitySystem.Tests
@@ -7,29 +7,15 @@ namespace QuantitySystem.Tests
     ///This is a test class for LengthTest and is intended
     ///to contain all LengthTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class LengthTest
     {
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext { get; set; }
-
-        /// <summary>
-        ///A test for Dimension
-        ///</summary>
-        public void DimensionTestHelper<T>()
-        {
-            var target = new Length<T>();
-            var lengthDimension = new QuantityDimension(0, 1, 0);
-            Assert.AreEqual(lengthDimension, target.Dimension);
-        }
-
-        [TestMethod]
+        [Test]
         public void DimensionTest()
         {
-            DimensionTestHelper<GenericParameterHelper>();
+            var target = new Length<double>();
+            var lengthDimension = new QuantityDimension(0, 1, 0);
+            Assert.That(target.Dimension, Is.EqualTo(lengthDimension));
         }
     }
 }
