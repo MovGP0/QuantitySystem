@@ -5,8 +5,6 @@ using QuantitySystem.Quantities.BaseQuantities;
 
 namespace QuantitySystem.Units.Currency
 {
-
-
 <#
 var codes = new System.Collections.Generic.List<string>();
 
@@ -176,21 +174,18 @@ codes.Add("ZMK: Zambian Kwacha (pre-2013)");
 codes.Add("ZMW: Zambian Kwacha");
 codes.Add("ZWL: Zimbabwean Dollar");
 
-
 foreach(var code in codes)
 {
 	var cc = code.Substring(0,3);
-	var cn = code.Substring(4).Trim().Replace(" ","_").Replace("-","_").Replace("(","").Replace(")","");
+	var cn = code.Substring(4).Trim().Replace(" ","").Replace("-","").Replace("(","").Replace(")","");
 #>
     [Unit("<#=cc#>", typeof(Currency<>))]
-	[ReferenceUnit(typeof(United_States_Dollar), "Currency.<#=cc#>")]
+	[ReferenceUnit(typeof(UnitedStatesDollar), "Currency.<#=cc#>")]
     public sealed class <#=cn#> : Unit  
     {
-
     }
 
 <#
 }
 #>
-
 }

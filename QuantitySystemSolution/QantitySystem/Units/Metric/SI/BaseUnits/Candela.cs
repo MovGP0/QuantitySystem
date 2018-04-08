@@ -6,6 +6,5 @@ namespace QuantitySystem.Units.Metric.SI.BaseUnits
     [MetricUnit("cd", typeof(LuminousIntensity<>))]
     public sealed class Candela : MetricUnit
     {
-
     }
 }

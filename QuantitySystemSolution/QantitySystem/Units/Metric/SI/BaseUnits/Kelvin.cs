@@ -6,7 +6,5 @@ namespace QuantitySystem.Units.Metric.SI.BaseUnits
     [MetricUnit("K", typeof(Temperature<>))]
     public sealed class Kelvin : MetricUnit
     {
-
-
     }
 }

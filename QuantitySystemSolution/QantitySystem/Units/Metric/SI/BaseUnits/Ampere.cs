@@ -6,8 +6,5 @@ namespace QuantitySystem.Units.Metric.SI.BaseUnits
     [MetricUnit("A", typeof(ElectricalCurrent<>))]
     public sealed class Ampere : MetricUnit
     {
-
-
-        
     }
 }

@@ -6,7 +6,5 @@ namespace QuantitySystem.Units.Metric.SI.BaseUnits
     [MetricUnit("mol", typeof(AmountOfSubstance<>))]
     public sealed class Mole : MetricUnit
     {
-
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using QuantitySystem.Attributes;
-
 using QuantitySystem.Quantities.DimensionlessQuantities;
 
 namespace QuantitySystem.Units.Metric.SI

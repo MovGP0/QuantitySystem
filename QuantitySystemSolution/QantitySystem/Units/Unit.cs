@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using QuantitySystem.Quantities.BaseQuantities;
 using QuantitySystem.Attributes;
@@ -13,6 +14,7 @@ using QuantitySystem.Units.Metric.SI.BaseUnits;
 
 namespace QuantitySystem.Units
 {
+    [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
     public class Unit
     {
         /// <summary>
@@ -29,45 +31,32 @@ namespace QuantitySystem.Units
 
             if (ReferenceUnit != null) //check that first parent exist.
             {
-                var RefUnit = this;
-                double RefTimesNum = 1;
-                double RefTimesDen = 1;
-
-                //double RefShift = 0.0;
+                var refUnit = this;
+                double refTimesNum = 1;
+                double refTimesDen = 1;
 
                 // do the iteration until we reach the default unit.
-                while (RefUnit.IsDefaultUnit == false)
+                while (refUnit.IsDefaultUnit == false)
                 {
+                    path.Push(new UnitPathItem
+                    {
+                        Unit = refUnit,
+                        Numerator = refTimesNum,
+                        Denominator = refTimesDen
+                    });
 
-                    path.Push(
-                        new UnitPathItem
-                        {
-                            Unit = RefUnit,
-                            Numerator = RefTimesNum,
-                            Denominator = RefTimesDen,
-                            //Shift = RefShift
-                        }
-                    );
-
-                    RefTimesNum = RefUnit.ReferenceUnitNumerator;  //get the value before changing the RefUnit
-                    RefTimesDen = RefUnit.ReferenceUnitDenominator;
-                    //RefShift = RefUnit.ReferenceUnitShift;
-
-                    RefUnit = RefUnit.ReferenceUnit;
-
-                    // check the reference unit system or (namespace) if different throw exception.
-                    //  the exception prevent crossing the system boundary.
-                    //if (RefUnit.GetType().Namespace != this.GetType().Namespace) throw new UnitException("Unit system access violation");
+                    refTimesNum = refUnit.ReferenceUnitNumerator;  //get the value before changing the RefUnit
+                    refTimesDen = refUnit.ReferenceUnitDenominator;
+                    refUnit = refUnit.ReferenceUnit;
                 }
 
                 // because of while there is another information should be put on the stack.
                 path.Push(
                     new UnitPathItem
                     {
-                        Unit = RefUnit,
-                        Numerator = RefTimesNum,
-                        Denominator = RefTimesDen,
-                        //Shift = RefShift
+                        Unit = refUnit,
+                        Numerator = refTimesNum,
+                        Denominator = refTimesDen
                     }
                 );
             }
@@ -82,8 +71,7 @@ namespace QuantitySystem.Units
                         {
                             Unit = this,
                             Numerator = 1,
-                            Denominator = 1,
-                            //Shift = 0.0
+                            Denominator = 1
                         }
                     );
                 }
@@ -92,40 +80,35 @@ namespace QuantitySystem.Units
             return path;
         }
 
-
         /// <summary>
         /// Create units path from default unit in the dimension of the current unit system to the running unit instance.
         /// </summary>
         /// <returns></returns>
         public UnitPathStack PathFromDefaultUnit()
         {
-            var Forward = PathToDefaultUnit();
+            var forward = PathToDefaultUnit();
+            var backward = new UnitPathStack();
 
-            var Backward = new UnitPathStack();
-
-            while (Forward.Count > 0)
+            while (forward.Count > 0)
             {
-                var upi = Forward.Pop();
+                var upi = forward.Pop();
 
                 if (upi.Unit.IsDefaultUnit)
                 {
                     upi.Numerator = 1;
                     upi.Denominator = 1;
-                    //upi.Shift = 0;
                 }
                 else
                 {
                     upi.Numerator = upi.Unit.ReferenceUnitDenominator;  //invert the number
                     upi.Denominator = upi.Unit.ReferenceUnitNumerator;
-                    //upi.Shift = 0 - upi.Unit.ReferenceUnitShift;
                 }
 
-                Backward.Push(upi);
+                backward.Push(upi);
             }
 
-            return Backward;
+            return backward;
         }
-
 
         /// <summary>
         /// Create units path from unit to unit.
@@ -134,23 +117,21 @@ namespace QuantitySystem.Units
         /// <returns></returns>
         public UnitPathStack PathFromUnit(Unit unit)
         {
-
             return unit.PathToUnit(this);
-
         }
 
         public Func<Unit, Unit, string> UnitToUnitSymbol = (x, y) => "[" + x.Symbol + ":" + x.UnitDimension.ToString() + "]" + "__" + "[" + y.Symbol + ":" + y.UnitDimension.ToString() + "]";
 
         private static readonly Dictionary<string, UnitPathStack> CachedPaths = new Dictionary<string, UnitPathStack>();
 
-        private static bool enableUnitsCaching = true;
+        private static bool _enableUnitsCaching = true;
         public static bool EnableUnitsCaching
         {
-            get => enableUnitsCaching;
+            get => _enableUnitsCaching;
             set
             {
-                enableUnitsCaching = value;
-                if (enableUnitsCaching) CachedPaths.Clear();
+                _enableUnitsCaching = value;
+                if (_enableUnitsCaching) CachedPaths.Clear();
             }
         }
 
@@ -175,7 +156,6 @@ namespace QuantitySystem.Units
                         // during the application, and there were hidden error that poping from unit path in the 
                         // cached store will not get them back again ;)
                         //  I MUST return cloned copy of the UnitPath.
-
                     }
                 }
                 #endregion
@@ -202,28 +182,26 @@ namespace QuantitySystem.Units
                 //  because this needs special treatment. ;)
                 if (IsStronglyTyped == false || unit.IsStronglyTyped == false)
                 {
-                    #region Complex units
-
                     //the unit is not strongly typed so we need to make conversion to get its conversion
                     // Source unit ==> SI Base Units
                     // target unit ==> SI BaseUnits
 
-                    var SourcePath = PathToSIBaseUnits();
-                    var TargetPath = unit.PathToSIBaseUnits();
+                    var sourcePath = PathToSIBaseUnits();
+                    var targetPath = unit.PathToSIBaseUnits();
 
-                    var Tito = new UnitPathStack();
+                    var tito = new UnitPathStack();
 
-                    while (SourcePath.Count > 0)
+                    while (sourcePath.Count > 0)
                     {
-                        Tito.Push(SourcePath.Pop());
+                        tito.Push(sourcePath.Pop());
                     }
                     //we have to invert the target 
-                    while (TargetPath.Count > 0)
+                    while (targetPath.Count > 0)
                     {
-                        var upi = TargetPath.Pop();
+                        var upi = targetPath.Pop();
                         upi.Invert();
 
-                        Tito.Push(upi);
+                        tito.Push(upi);
 
                     }
 
@@ -231,12 +209,10 @@ namespace QuantitySystem.Units
 
                     if (EnableUnitsCaching)
                     {
-                        CachedPaths.Add(UnitToUnitSymbol(this, unit), Tito.Clone());
+                        CachedPaths.Add(UnitToUnitSymbol(this, unit), tito.Clone());
                     }
 
-                    return Tito;
-
-                    #endregion
+                    return tito;
                 }
 
                 // 1- Get Path default unit to current unit.
@@ -298,75 +274,72 @@ namespace QuantitySystem.Units
                     //     and in this case we will take the last bottom unit of stack and get its reference
                     systemsPath = new UnitPathStack();
 
-                    UnitPathItem DefaultPItem;
-                    UnitPathItem RefUPI;
+                    UnitPathItem defaultUnitPathItem;
+                    UnitPathItem referenceUnitPathItem;
 
-                    var SourceDefaultUnit = fromMeToDefaultUnit.Peek().Unit;
+                    var sourceDefaultUnit = fromMeToDefaultUnit.Peek().Unit;
 
-                    if (SourceDefaultUnit.UnitSystem != "Metric.SI" && SourceDefaultUnit.GetType() != typeof(Shared.Second))
+                    if (sourceDefaultUnit.UnitSystem != "Metric.SI" && sourceDefaultUnit.GetType() != typeof(Shared.Second))
                     {
                         //from source default unit to the si
-                        DefaultPItem = fromMeToDefaultUnit.Peek();
-                        RefUPI = new UnitPathItem
+                        defaultUnitPathItem = fromMeToDefaultUnit.Peek();
+                        referenceUnitPathItem = new UnitPathItem
                         {
-                            Numerator = DefaultPItem.Unit.ReferenceUnitNumerator,
-                            Denominator = DefaultPItem.Unit.ReferenceUnitDenominator,
-                            //Shift = DefaultPItem.Unit.ReferenceUnitShift,
-                            Unit = DefaultPItem.Unit.ReferenceUnit
+                            Numerator = defaultUnitPathItem.Unit.ReferenceUnitNumerator,
+                            Denominator = defaultUnitPathItem.Unit.ReferenceUnitDenominator,
+                            Unit = defaultUnitPathItem.Unit.ReferenceUnit
                         };
                     }
                     else
                     {
                         // from target default unit to si
-                        DefaultPItem = fromDefaultUnitToTargetUnit.ElementAt(fromDefaultUnitToTargetUnit.Count - 1);
-                        RefUPI = new UnitPathItem
+                        defaultUnitPathItem = fromDefaultUnitToTargetUnit.ElementAt(fromDefaultUnitToTargetUnit.Count - 1);
+                        referenceUnitPathItem = new UnitPathItem
                         {
                             //note the difference here 
                             //I made the opposite assignments because we are in reverse manner
 
-                            Numerator = DefaultPItem.Unit.ReferenceUnitDenominator, // <=== opposite
-                            Denominator = DefaultPItem.Unit.ReferenceUnitNumerator, // <===
-                            //Shift = 0-DefaultPItem.Unit.ReferenceUnitShift,
-                            Unit = DefaultPItem.Unit.ReferenceUnit
+                            Numerator = defaultUnitPathItem.Unit.ReferenceUnitDenominator,
+                            Denominator = defaultUnitPathItem.Unit.ReferenceUnitNumerator,
+                            Unit = defaultUnitPathItem.Unit.ReferenceUnit
                         };
                     }
 
-                    if (RefUPI.Unit != null)
+                    if (referenceUnitPathItem.Unit != null)
                     {
-                        systemsPath.Push(RefUPI);
+                        systemsPath.Push(referenceUnitPathItem);
                     }
                 }
 
                 //combine the two paths
-                var Total = new UnitPathStack();
+                var total = new UnitPathStack();
 
                 //we are building the conversion stairs
                 // will end like a stack
 
-
                 //begin from me unit to default unit
                 for (var i = fromMeToDefaultUnit.Count - 1; i >= 0; i--)
                 {
-                    Total.Push(fromMeToDefaultUnit.ElementAt(i));
+                    total.Push(fromMeToDefaultUnit.ElementAt(i));
                 }
 
-                var One = new Unit(typeof(DimensionlessQuantity<>));
+                var one = new Unit(typeof(DimensionlessQuantity<>));
 
                 //cross the system if we need to .
                 if (systemsPath != null)
                 {
-                    Total.Push(new UnitPathItem { Denominator = 1, Numerator = 1, Unit = One });
+                    total.Push(new UnitPathItem { Denominator = 1, Numerator = 1, Unit = one });
                     for (var i = systemsPath.Count - 1; i >= 0; i--)
                     {
-                        Total.Push(systemsPath.ElementAt(i));
+                        total.Push(systemsPath.ElementAt(i));
                     }
-                    Total.Push(new UnitPathItem { Denominator = 1, Numerator = 1, Unit = One });
+                    total.Push(new UnitPathItem { Denominator = 1, Numerator = 1, Unit = one });
                 }
 
                 // from default unit to target unit
                 for (var i = fromDefaultUnitToTargetUnit.Count - 1; i >= 0; i--)
                 {
-                    Total.Push(fromDefaultUnitToTargetUnit.ElementAt(i));
+                    total.Push(fromDefaultUnitToTargetUnit.ElementAt(i));
                 }
 
                 //another check if the units are inverted then 
@@ -374,17 +347,17 @@ namespace QuantitySystem.Units
 
                 if (IsInverted && unit.IsInverted)
                 {
-                    foreach (var upi in Total)
+                    foreach (var upi in total)
                         upi.Invert();
                 }
 
                 //Second location in cache  look above for the first one in the same function here :D
                 if (EnableUnitsCaching)
                 {
-                    CachedPaths.Add(UnitToUnitSymbol(this, unit), Total.Clone());
+                    CachedPaths.Add(UnitToUnitSymbol(this, unit), total.Clone());
                 }
 
-                return Total;
+                return total;
             }
         }
 
@@ -435,15 +408,15 @@ namespace QuantitySystem.Units
                     return path;
                 }
 
-                var SIUnit = (Unit)Activator.CreateInstance(innerUnitType);
-                SIUnit.UnitExponent = UnitExponent;
-                SIUnit.UnitDimension = UnitDimension;
+                var siUnit = (Unit)Activator.CreateInstance(innerUnitType);
+                siUnit.UnitExponent = UnitExponent;
+                siUnit.UnitDimension = UnitDimension;
 
-                up = PathToUnit(SIUnit);
+                up = PathToUnit(siUnit);
 
-                if (!SIUnit.IsBaseUnit)
+                if (!siUnit.IsBaseUnit)
                 {
-                    if (SIUnit.UnitDimension.IsDimensionless && SIUnit.IsStronglyTyped)
+                    if (siUnit.UnitDimension.IsDimensionless && siUnit.IsStronglyTyped)
                     {
                         //for dimensionless units like radian, stradian
                         //do nothing.
@@ -451,7 +424,7 @@ namespace QuantitySystem.Units
                     else
                     {
                         //expand the unit 
-                        var expandedUnit = ExpandMetricUnit((MetricUnit)SIUnit);
+                        var expandedUnit = ExpandMetricUnit((MetricUnit)siUnit);
                         var expath = expandedUnit.PathToSIBaseUnits();
 
                         while (expath.Count > 0)
@@ -726,13 +699,13 @@ namespace QuantitySystem.Units
         {
             var unit = unitName.Replace("$", "\\$");
 
-            var UnitModifier = false;
+            var unitModifier = false;
 
             if (unit.EndsWith("!", StringComparison.Ordinal))
             {
                 //it is intended of Radius length
                 unit = unit.TrimEnd('!');
-                UnitModifier = true; //unit modifier have one use for now is to convert the Length Quantity into Length Quantity into RadiusLength quantity
+                unitModifier = true; //unit modifier have one use for now is to convert the Length Quantity into Length Quantity into RadiusLength quantity
             }
 
             foreach (var unitType in UnitTypes)
@@ -751,7 +724,7 @@ namespace QuantitySystem.Units
                             metricUnit.UnitPrefix = MetricPrefix.None;
                         }
 
-                        if (UnitModifier)
+                        if (unitModifier)
                         {
                             //test if the dimension is length and modify it to be radius length
                             if (u.QuantityType == typeof(Length<>))
@@ -1070,6 +1043,7 @@ namespace QuantitySystem.Units
         /// Create the unit directly from the specfied dimension based on the unit system given.
         /// </summary>
         /// <param name="dimension"></param>
+        /// <param name="unitSystem"></param>
         public static Unit DiscoverUnit(QuantityDimension dimension, string unitSystem)
         {
             var subUnits = new List<Unit>();
@@ -1349,29 +1323,28 @@ namespace QuantitySystem.Units
         /// <param name="quantity"></param>
         public static Unit DiscoverUnit(BaseQuantity quantity)
         {
-            var m_QuantityType = quantity.GetType();
+            var mQuantityType = quantity.GetType();
 
-            var gen_q = m_QuantityType.GetGenericTypeDefinition();
+            var genQ = mQuantityType.GetGenericTypeDefinition();
 
-            if (gen_q == typeof(Currency<>)) return new Currency.Coin();
-            if (gen_q == typeof(Digital<>)) return new Digital.Bit();
+            if (genQ == typeof(Currency<>)) return new Currency.Coin();
+            if (genQ == typeof(Digital<>)) return new Digital.Bit();
 
-            if (gen_q == typeof(PolarLength<>))
+            if (genQ == typeof(PolarLength<>))
             {
                 //because all length units associated with the Length<> Type
-                m_QuantityType = typeof(Length<>).MakeGenericType(m_QuantityType.GetGenericArguments()[0]);
+                mQuantityType = typeof(Length<>).MakeGenericType(mQuantityType.GetGenericArguments()[0]);
             }
 
             if (quantity.Dimension.IsDimensionless)
             {
-                var QtyType = m_QuantityType;
-                if (!QtyType.IsGenericTypeDefinition)
+                var qtyType = mQuantityType;
+                if (!qtyType.IsGenericTypeDefinition)
                 {
-                    QtyType = QtyType.GetGenericTypeDefinition();
-
+                    qtyType = qtyType.GetGenericTypeDefinition();
                 }
 
-                if (QtyType == typeof(DimensionlessQuantity<>))
+                if (qtyType == typeof(DimensionlessQuantity<>))
                 {
                     return DiscoverUnit(QuantityDimension.Dimensionless);
                 }
@@ -1381,14 +1354,14 @@ namespace QuantitySystem.Units
 
             //try direct mapping first to get the unit
 
-            var innerUnitType = GetDefaultSIUnitTypeOf(m_QuantityType);
+            var innerUnitType = GetDefaultSIUnitTypeOf(mQuantityType);
 
             if (innerUnitType == null) //no direct mapping so get it from the inner quantities
             {
                 //I can't cast BaseQuantity to AnyQuantity<object>  very annoying
                 //so I used reflection.
 
-                var giq = m_QuantityType.GetMethod("GetInternalQuantities");
+                var giq = mQuantityType.GetMethod("GetInternalQuantities");
 
                 //casted the array to BaseQuantity array also
                 var internalQuantities = giq.Invoke(quantity, null) as BaseQuantity[];
@@ -1437,7 +1410,7 @@ namespace QuantitySystem.Units
                 return un;
             }
 
-            return new Unit(m_QuantityType, subUnits.ToArray());
+            return new Unit(mQuantityType, subUnits.ToArray());
         }
 
         /// <summary>
@@ -1514,11 +1487,11 @@ namespace QuantitySystem.Units
         /// Group all similar units so it remove units that reached exponent zero
         /// also keep track of prefixes of metric units.
         /// </summary>
-        /// <param name="bulk_units"></param>
+        /// <param name="bulkUnits"></param>
         /// <returns></returns>
-        private List<Unit> GroupUnits(List<Unit> bulk_units)
+        private List<Unit> GroupUnits(List<Unit> bulkUnits)
         {
-            var units = FlattenUnits(bulk_units);
+            var units = FlattenUnits(bulkUnits);
 
             if (units.Count == 1) return units;
 
@@ -1707,7 +1680,7 @@ namespace QuantitySystem.Units
                     if (exponent > -1 && exponent < 0) unitDenominator += "^" + Math.Abs(exponent).ToString(CultureInfo.InvariantCulture);
                 }
             }
-            
+
             foreach (var unit in SubUnits)
             {
                 ConcatenateUnit(unit.Symbol, unit.UnitExponent);
@@ -1807,31 +1780,14 @@ namespace QuantitySystem.Units
                     _Symbol = ua.Symbol;
                     _QuantityType = ua.QuantityType;
                     _UnitDimension = QuantityDimension.DimensionFrom(_QuantityType);
-
-
-                    if (ua is DefaultUnitAttribute)
-                    {
-                        _IsDefaultUnit = true;  //indicates that this unit is the default when creating the quantity in this system
-                        //also default unit is the unit that relate its self to the SI Unit.
-                    }
-                    else
-                    {
-                        _IsDefaultUnit = false;
-                    }
+                    _IsDefaultUnit = ua is DefaultUnitAttribute;
                 }
                 else
                 {
                     throw new UnitException("Unit Attribute not found");
                 }
 
-                if (_QuantityType.Namespace == "QuantitySystem.Quantities.BaseQuantities")
-                {
-                    IsBaseUnit = true;
-                }
-                else
-                {
-                    IsBaseUnit = false;
-                }
+                IsBaseUnit = _QuantityType.Namespace == "QuantitySystem.Quantities.BaseQuantities";
 
                 //Get the reference attribute
                 var dua = (ReferenceUnitAttribute)attributes.SingleOrDefault(ut => ut is ReferenceUnitAttribute);
@@ -1888,9 +1844,8 @@ namespace QuantitySystem.Units
         public QuantityDimension UnitDimension
         {
             get => _UnitDimension;
-            internal set { _UnitDimension = value; }
+            internal set => _UnitDimension = value;
         }
-
 
         /// <summary>
         /// The Type of the Quantity of this unit.
@@ -1909,7 +1864,6 @@ namespace QuantitySystem.Units
         /// Tells if Unit is related to one of the seven base quantities.
         /// </summary>
         public bool IsBaseUnit { get; }
-
 
         /// <summary>
         /// The unit that serve a parent for this unit.
@@ -1944,32 +1898,25 @@ namespace QuantitySystem.Units
         /// <returns></returns>
         public Unit Invert()
         {
-            Unit unit = null;
             if (SubUnits != null)
             {
                 //convert sub units if this were only a generated unit.
 
-                var InvertedUnits = new List<Unit>();
+                var invertedUnits = new List<Unit>();
 
                 foreach (var lun in SubUnits)
                 {
-                    InvertedUnits.Add(lun.Invert());
+                    invertedUnits.Add(lun.Invert());
 
                 }
 
-                unit = new Unit(QuantityType, InvertedUnits.ToArray());
-
+                return new Unit(QuantityType, invertedUnits.ToArray());
             }
-            else
-            {
-                //convert exponent because this is a strongly typed unit.
 
-                unit = (Unit)MemberwiseClone();
-                unit.UnitExponent = 0 - UnitExponent;
-                unit.UnitDimension = unit.UnitDimension.Invert();
-
-
-            }
+            //convert exponent because this is a strongly typed unit.
+            var unit = (Unit)MemberwiseClone();
+            unit.UnitExponent = 0 - UnitExponent;
+            unit.UnitDimension = unit.UnitDimension.Invert();
             return unit;
         }
 
@@ -1985,68 +1932,55 @@ namespace QuantitySystem.Units
         /// <returns></returns>
         public AnyQuantity<T> GetThisUnitQuantity<T>()
         {
-
-            AnyQuantity<T> Quantity = null;
-
+            AnyQuantity<T> quantity;
             var qt = QuantityType.MakeGenericType(typeof(T));
 
             if (Qcach.TryGetValue(qt, out var j))
             {
-                Quantity = ((AnyQuantity<T>)j).Clone();  //optimization for created quantities before
-
-            }
-            else
-            {
-                Quantity = (AnyQuantity<T>)Activator.CreateInstance(QuantityType.MakeGenericType(typeof(T)));
-                Qcach.Add(qt, Quantity);
-
+                quantity = ((AnyQuantity<T>)j).Clone();  //optimization for created quantities before
+                quantity.Unit = this;
+                return quantity;
             }
 
-            Quantity.Unit = this;
-
-
-            return Quantity;
+            quantity = (AnyQuantity<T>)Activator.CreateInstance(QuantityType.MakeGenericType(typeof(T)));
+            Qcach.Add(qt, quantity);
+            quantity.Unit = this;
+            return quantity;
         }
 
         public AnyQuantity<T> GetThisUnitQuantity<T>(T value)
         {
-
-            AnyQuantity<T> Quantity = null;
+            AnyQuantity<T> quantity;
             if (QuantityType != typeof(DerivedQuantity<>) && QuantityType != null)
             {
                 var qt = QuantityType.MakeGenericType(typeof(T));
 
                 if (Qcach.TryGetValue(qt, out var j))
                 {
-
-                    Quantity = ((AnyQuantity<T>)j).Clone();  //optimization for created quantities before
+                    quantity = ((AnyQuantity<T>)j).Clone();  //optimization for created quantities before
                 }
                 else
                 {
-
-                    Quantity = (AnyQuantity<T>)Activator.CreateInstance(qt);
-
-                    Qcach.Add(qt, Quantity);
+                    quantity = (AnyQuantity<T>)Activator.CreateInstance(qt);
+                    Qcach.Add(qt, quantity);
                 }
             }
             else
             {
                 //create it from the unit dimension
-                Quantity = new DerivedQuantity<T>(UnitDimension);
-
+                quantity = new DerivedQuantity<T>(UnitDimension);
             }
-            Quantity.Unit = this;
 
-            Quantity.Value = value;
+            quantity.Unit = this;
+            quantity.Value = value;
 
-            if (IsOverflowed) Quantity.Value =
+            if (IsOverflowed) quantity.Value =
                 AnyQuantity<T>.MultiplyScalarByGeneric(GetUnitOverflow(), value);
 
-            return Quantity;
+            return quantity;
         }
 
         public float UnitExponent { get; set; } = 1;
-
         public const string MixedSystem = "MixedSystem";
 
         public string UnitSystem
@@ -2059,11 +1993,11 @@ namespace QuantitySystem.Units
 
                 if (IsStronglyTyped)
                 {
-                    var UnitType = GetType();
-
-                    var ns = UnitType.Namespace.Substring(UnitType.Namespace.LastIndexOf("Units.", StringComparison.Ordinal) + 6);
+                    var unitType = GetType();
+                    var ns = unitType.Namespace.Substring(unitType.Namespace.LastIndexOf("Units.", StringComparison.Ordinal) + 6);
                     return ns;
                 }
+
                 //mixed system
                 // check all sub units if there unit system is the same then
                 //  return it 
@@ -2094,14 +2028,7 @@ namespace QuantitySystem.Units
         /// <summary>
         /// Determine if the unit is inverted or not.
         /// </summary>
-        public bool IsInverted
-        {
-            get
-            {
-                if (UnitExponent < 0) return true;
-                return false;
-            }
-        }
+        public bool IsInverted => UnitExponent < 0;
 
         public bool IsStronglyTyped { get; }
 
@@ -2114,7 +2041,7 @@ namespace QuantitySystem.Units
         {
             return (Unit)MemberwiseClone();
         }
-        
+
         public override bool Equals(object obj)
         {
             if (obj is Unit u)

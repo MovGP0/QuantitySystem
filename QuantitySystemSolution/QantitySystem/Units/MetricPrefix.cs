@@ -1,4 +1,5 @@
 ﻿using System;
+using QuantitySystem.Exceptions;
 
 namespace QuantitySystem.Units
 {

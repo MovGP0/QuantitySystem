@@ -7,5 +7,4 @@ namespace QuantitySystem.Units.Shared
     public sealed class Second : MetricUnit
     {
     }
-
 }
