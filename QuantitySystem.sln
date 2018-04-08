@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuantitySystem", "QantitySystem\QuantitySystem.csproj", "{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantitySystem.Tests", "QuantitySystem.Tests\QuantitySystem.Tests.csproj", "{F146F0E5-FF6D-4C59-9B5D-2662193498BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D915E0-5533-4A02-BCBA-BAF8AC934EF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F146F0E5-FF6D-4C59-9B5D-2662193498BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F146F0E5-FF6D-4C59-9B5D-2662193498BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F146F0E5-FF6D-4C59-9B5D-2662193498BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F146F0E5-FF6D-4C59-9B5D-2662193498BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4496D8C2-BADE-4C87-B5ED-122009828F4F}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = QuantitySystemSolution.vsmdi
+	EndGlobalSection
+EndGlobal

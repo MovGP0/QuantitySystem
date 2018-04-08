@@ -1,0 +1,17 @@
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\QuantitySystem.Tests.deps.json
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\QuantitySystem.Tests.runtimeconfig.json
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\QuantitySystem.Tests.runtimeconfig.dev.json
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\QuantitySystem.Tests.dll
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\QuantitySystem.Tests.pdb
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\obj\Debug\netcoreapp2.0\QuantitySystem.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\obj\Debug\netcoreapp2.0\QuantitySystem.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\obj\Debug\netcoreapp2.0\QuantitySystem.Tests.AssemblyInfoInputs.cache
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\obj\Debug\netcoreapp2.0\QuantitySystem.Tests.AssemblyInfo.cs
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\obj\Debug\netcoreapp2.0\QuantitySystem.Tests.dll
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\obj\Debug\netcoreapp2.0\QuantitySystem.Tests.pdb
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\QuantitySystem.dll
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\bin\Debug\netcoreapp2.0\QuantitySystem.pdb
+C:\Users\Johann\Documents\QuantitySystem\QuantitySystemSolution\QuantitySystem.Tests\obj\Debug\netcoreapp2.0\QuantitySystem.Tests.csproj.CopyComplete
